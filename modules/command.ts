@@ -1,73 +1,77 @@
-import { AutocompleteInteraction, ChatInputCommandInteraction, Message, SlashCommandBuilder } from "discord.js"
-import { Argument } from "./Argument"
+import {
+	AutocompleteInteraction,
+	ChatInputCommandInteraction,
+	Message,
+	SlashCommandBuilder,
+} from "discord.js";
+import { Argument } from "./Argument";
 
 interface MessageCommandOptions {
-    name: string;
-    description?: string;
-    aliases?: string[];
-    category?: string;
-    usage?: Argument[];
-    ownerOnly?: boolean;
-    managerOnly?: boolean;
-    run: (message: Message, ...agrs: string[]) => Promise<any>;
+	name: string;
+	description?: string;
+	aliases?: string[];
+	category?: string;
+	usage?: Argument[];
+	ownerOnly?: boolean;
+	managerOnly?: boolean;
+	run: (message: Message, ...agrs: string[]) => Promise<any>;
 }
 
-
 export class MessageCommand {
-    constructor(option: MessageCommandOptions) {
-        this.name = option.name,
-        this.description = option.description || '',
+	constructor(option: MessageCommandOptions) {
+		(this.name = option.name),
+			(this.description = option.description || ""),
+			(this.aliases = option.aliases || []),
+			(this.category = option.category || "General"),
+			(this.usage = option.usage || []),
+			(this.ownerOnly = option.ownerOnly || false),
+			(this.managerOnly = option.managerOnly || false),
+			(this.run = option.run);
+	}
 
-        this.aliases = option.aliases || [],
-        this.category = option.category || 'General',
-        this.usage = option.usage || [],
+	public readonly name: string;
 
-        this.ownerOnly = option.ownerOnly || false,
-        this.managerOnly = option.managerOnly || false,
+	public readonly description?: string;
+	public readonly aliases?: string[];
+	public readonly category?: string;
+	public readonly usage?: Argument[];
 
-        this.run = option.run
-    }
+	public readonly ownerOnly?: boolean;
+	public readonly managerOnly?: boolean;
 
-    public readonly name: string;
-
-    public readonly description?: string;
-    public readonly aliases?: string[];
-    public readonly category?: string;
-    public readonly usage?: Argument[];
-
-    public readonly ownerOnly?: boolean;
-    public readonly managerOnly?: boolean;
-
-    public readonly run: (message: Message, ...args: string[]) => Promise<any>;
+	public readonly run: (message: Message, ...args: string[]) => Promise<any>;
 }
 
 interface SlashCommandOptions {
-    managerOnly?: boolean;
-    ownerOnly?: boolean;
-    data: SlashCommandBuilder;
-    run: (interaction: ChatInputCommandInteraction) => Promise<any>;
-    completion?: (interaction: AutocompleteInteraction) => Promise<any>;
+	managerOnly?: boolean;
+	ownerOnly?: boolean;
+	data: SlashCommandBuilder;
+	run: (interaction: ChatInputCommandInteraction) => Promise<any>;
+	completion?: (interaction: AutocompleteInteraction) => Promise<any>;
 }
 
-
 export class SlashCommand {
-    constructor(option: SlashCommandOptions) {
-        this.data = option.data;
+	constructor(option: SlashCommandOptions) {
+		this.data = option.data;
 
-        this.managerOnly = option.managerOnly;
-        this.ownerOnly = option.ownerOnly;
+		this.managerOnly = option.managerOnly;
+		this.ownerOnly = option.ownerOnly;
 
-        this.run = option.run;
-        this.completion = option.completion;
-    }
+		this.run = option.run;
+		this.completion = option.completion;
+	}
 
-    public readonly data: SlashCommandBuilder;
+	public readonly data: SlashCommandBuilder;
 
-    public readonly managerOnly?: boolean;
-    public readonly ownerOnly?: boolean;
+	public readonly managerOnly?: boolean;
+	public readonly ownerOnly?: boolean;
 
-    public readonly guildsOnly?: boolean;
+	public readonly guildsOnly?: boolean;
 
-    public readonly run: (interaction: ChatInputCommandInteraction) => Promise<any>;
-    public readonly completion?: (interaction: AutocompleteInteraction) => Promise<void>;
+	public readonly run: (
+		interaction: ChatInputCommandInteraction
+	) => Promise<any>;
+	public readonly completion?: (
+		interaction: AutocompleteInteraction
+	) => Promise<void>;
 }

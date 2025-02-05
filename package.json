@@ -13,6 +13,8 @@
     "url": "https://github.com/FoxFire1501"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.4",
+    "chalk": "^5.4.1",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "esbuild": "^0.24.2",
