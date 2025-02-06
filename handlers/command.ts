@@ -24,6 +24,6 @@ export default async function (client: Client) {
 		command.aliases?.forEach((c) => client.messageCommands.set(c, command));
 	}
 
-	for (const folder of ["commands/messages", "commands/slashs"])
+	for (const folder of ["commands/messages/", "commands/slashs/"])
 		readdirSync(folder).forEach(async (i) => loadCommad(folder, i));
 }

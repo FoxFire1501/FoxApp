@@ -1,5 +1,5 @@
 import Client from "index";
-import { inlineCode, Message, userMention } from "discord.js";
+import { inlineCode, Message, userMention, Events } from "discord.js";
 import { Event, newLog } from "modules";
 import config from "config";
 
@@ -86,6 +86,25 @@ async function messageCreate(message: Message) {
 	try {
 		command.run(message, ...args);
 	} catch (err) {
+		return message.reply({
+			embeds: [
+				{
+					description: `Sảy ra lỗi khi cố sử dụng lệnh.`,
+					color: config.embedOption.color,
+					footer: {
+						text: config.embedOption.footer,
+						icon_url: message.author.displayAvatarURL({
+							forceStatic: true,
+						}),
+					},
+				},
+			],
+		});
 		newLog(err, "error");
 	}
 }
+
+export default new Event({
+	eventName: Events.MessageCreate,
+	run: messageCreate,
+});
