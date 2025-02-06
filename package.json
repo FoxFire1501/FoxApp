@@ -16,14 +16,18 @@
     "@types/chalk": "^2.2.4",
     "@types/get-image-colors": "^4.0.5",
     "@types/nodemailer": "^6.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
     "canvas": "^3.1.0",
     "chalk": "^5.4.1",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "esbuild": "^0.24.2",
     "get-image-colors": "^4.0.1",
+    "mongoose": "^8.10.0",
     "nodemailer": "^6.10.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "quick.db": "^9.1.7"
   }
 }

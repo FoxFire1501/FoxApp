@@ -4,6 +4,8 @@ import { readFileSync } from "fs";
 import { MessageCommand, SlashCommand } from "modules";
 import loadCommand from "handlers/command";
 import loadEvent from "handlers/event";
+import database from "handlers/database";
+import { QuickDB } from "quick.db";
 
 const package_json = JSON.parse(readFileSync("./package.json", "utf-8"));
 
@@ -13,6 +15,7 @@ interface ClientBaseOptions extends ClientOptions {
 
 	version: string;
 }
+
 
 export default class ClientBase extends Client {
 	constructor(option: ClientBaseOptions) {
@@ -25,6 +28,7 @@ export default class ClientBase extends Client {
 
 		this.messageCommands = new Map();
 		this.slashCommands = new Map();
+		this.db = database;
 
 		loadCommand(this);
 		loadEvent(this);
@@ -33,6 +37,7 @@ export default class ClientBase extends Client {
 	public readonly owner: string;
 	public readonly managers: string[];
 	public readonly version: string;
+	public readonly db: QuickDB | null;
 
 	public readonly messageCommands: Map<string, MessageCommand>;
 	public readonly slashCommands: Map<string, SlashCommand>;

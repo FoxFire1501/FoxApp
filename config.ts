@@ -21,4 +21,8 @@ export default {
 		error: "",
 		wait: "",
 	},
+
+	database: {
+		ulrMongo: process.env.MONGO
+	}
 };
