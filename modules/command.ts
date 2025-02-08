@@ -5,6 +5,7 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 import { Argument } from "./Argument";
+import ClientBase from "index";
 
 interface MessageCommandOptions {
 	name: string;
@@ -14,7 +15,7 @@ interface MessageCommandOptions {
 	usage?: Argument[];
 	ownerOnly?: boolean;
 	managerOnly?: boolean;
-	run: (message: Message, ...agrs: string[]) => Promise<any>;
+	run: (clinet: ClientBase, message: Message, ...agrs: string[]) => Promise<any>;
 }
 
 export class MessageCommand {
@@ -39,7 +40,7 @@ export class MessageCommand {
 	public readonly ownerOnly?: boolean;
 	public readonly managerOnly?: boolean;
 
-	public readonly run: (message: Message, ...args: string[]) => Promise<any>;
+	public readonly run: (clinet: ClientBase, message: Message, ...args: string[]) => Promise<any>;
 }
 
 interface SlashCommandOptions {

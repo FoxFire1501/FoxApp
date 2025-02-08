@@ -1,21 +1,24 @@
 import { lstatSync, readdirSync } from "fs";
-import Client from "index";
+import ClientBase from "index";
 import { MessageCommand, SlashCommand } from "modules";
 
-import path from "path";
+import { join } from "path";
 
-export default async function (client: Client) {
+export default async function (client: ClientBase) {
 	async function loadCommad(root: string, item: string): Promise<any> {
 		if (lstatSync(root + item).isDirectory()) {
-			const newRoot = path.join(root, item, "/");
+			const newRoot = join(root, item, "/");
 			return readdirSync(newRoot).forEach(async (i) =>
 				loadCommad(newRoot, i)
 			);
 		}
 
-		const command = (await import(path.join(root, item))).default as
+		const command = (await import(join(root, item))).default as
 			| MessageCommand
 			| SlashCommand;
+
+		if (!command) return;
+
 		if (command instanceof SlashCommand)
 			return client.slashCommands.set(command.data.name, command);
 

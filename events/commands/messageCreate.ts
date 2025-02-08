@@ -1,4 +1,4 @@
-import Client from "index";
+import ClientBase from "index";
 import { inlineCode, Message, userMention, Events } from "discord.js";
 import { Event, newLog } from "modules";
 import config from "config";
@@ -11,7 +11,7 @@ async function messageCreate(message: Message) {
 	)
 		return;
 
-	const client = message.client as Client;
+	const client = message.client as ClientBase;
 
 	client.user = client.user!;
 
@@ -84,8 +84,9 @@ async function messageCreate(message: Message) {
 	}
 
 	try {
-		command.run(message, ...args);
+		command.run(client, message, ...args);
 	} catch (err) {
+		newLog(err, "error");
 		return message.reply({
 			embeds: [
 				{
@@ -100,7 +101,6 @@ async function messageCreate(message: Message) {
 				},
 			],
 		});
-		newLog(err, "error");
 	}
 }
 

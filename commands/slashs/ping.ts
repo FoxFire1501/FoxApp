@@ -1,9 +1,9 @@
 import { SlashCommand } from "modules";
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import Client from "index";
+import ClientBase from "index";
 
 async function pingCommand(interaction: ChatInputCommandInteraction) {
-	const client = interaction.client as Client;
+	const client = interaction.client as ClientBase;
 
 	interaction.reply("Test");
 }

@@ -1,4 +1,4 @@
-import Client from "index";
+import ClientBase from "index";
 import { Events, Interaction } from "discord.js";
 import { Event } from "modules";
 
@@ -7,7 +7,7 @@ async function slashCommand(interaction: Interaction) {
 
     if (interaction.user.bot) return;
 
-    const client = interaction.client as Client;
+    const client = interaction.client as ClientBase;
     const command = client.slashCommands.get(interaction.commandName);
 
     if (!command) return;

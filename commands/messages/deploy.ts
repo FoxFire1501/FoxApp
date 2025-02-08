@@ -1,10 +1,9 @@
 import { Message, SlashCommandBuilder } from "discord.js";
-import Client from "index";
+import ClientBase from "index";
 import { MessageCommand } from "modules";
 
 // deploy slash commands
-async function deployCommand(message: Message, ...args: string[]) {
-    const client = message.client as Client;
+async function deployCommand(client: ClientBase, message: Message, ...args: string[]) {
 
     const guildID = args[1];
 

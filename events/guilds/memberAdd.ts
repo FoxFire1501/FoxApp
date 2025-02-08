@@ -1,9 +1,9 @@
 import { Event } from "modules";
 import { Events, GuildMember } from "discord.js";
-import Client from "index";
+import ClientBase from "index";
 
 async function memberAdd(member: GuildMember) {
-    const client = member.client as Client;
+    const client = member.client as ClientBase;
     const guiWelChannel = await client.db?.get(`${member.guild.id}.welChannelId`)
 
     if (!guiWelChannel) return;

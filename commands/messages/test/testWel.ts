@@ -1,8 +1,8 @@
 import { createWelImage, MessageCommand } from "modules";
-import Client from "index";
+import ClientBase from "index";
 import { Message } from "discord.js";
 
-async function testWel(message: Message, ...args: string[]) {
+async function testWel(client: ClientBase, message: Message, ...args: string[]) {
     if (!message.member) return;
 	const img = await createWelImage(message.member);
 
@@ -19,4 +19,5 @@ async function testWel(message: Message, ...args: string[]) {
 export default new MessageCommand({
 	name: "tw",
 	run: testWel,
+	ownerOnly: true,
 });

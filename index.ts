@@ -5,7 +5,7 @@ import { MessageCommand, SlashCommand } from "modules";
 import loadCommand from "handlers/command";
 import loadEvent from "handlers/event";
 import database from "handlers/database";
-import { QuickDB } from "quick.db";
+import { Database } from "quickmongo";
 
 const package_json = JSON.parse(readFileSync("./package.json", "utf-8"));
 
@@ -37,7 +37,7 @@ export default class ClientBase extends Client {
 	public readonly owner: string;
 	public readonly managers: string[];
 	public readonly version: string;
-	public readonly db: QuickDB | null;
+	public readonly db: Database | null;
 
 	public readonly messageCommands: Map<string, MessageCommand>;
 	public readonly slashCommands: Map<string, SlashCommand>;

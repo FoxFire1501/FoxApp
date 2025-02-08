@@ -1,8 +1,8 @@
 import { MessageCommand } from "modules";
-import Client from "index";
+import ClientBase from "index";
 import { Message } from "discord.js";
 
-async function pingCommand(message: Message, ...args: string[]) {
+async function pingCommand(client: ClientBase, message: Message, ...args: string[]) {
     message.reply("Test")
 }
 
